@@ -1,0 +1,16 @@
+class Solution {
+    
+    PalinArray(arr,n){
+        //code here
+        for(let k=0; k<n; k++){
+            let str = arr[k] + ""
+            let i= 0;
+            let j= str.length-1
+            while(i<j){
+                if(str[i++] !== str[j--]) return 0
+            }
+        }
+        
+        return 1
+    }
+}
