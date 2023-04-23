@@ -1,0 +1,61 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    for(let i=0; i<nums.length-1; i++){
+        for(let j=i+1; j<nums.length; j++){
+            if(nums[i] === nums[j]) return nums[i]
+        }
+    }
+};
+
+//T.C => O(N*N)
+//S.C => O(1)
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    nums.sort((a,b) => a-b)
+    for(let i=0; i<nums.length-1; i++){
+        if(nums[i] == nums[i+1]) return nums[i]
+    }
+};
+
+//S.C => O(1)
+//T.C => O(NLOGN)
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    const hashTable = new Array(nums.length).fill(0)
+    for(let i=0; i<nums.length; i++){
+        hashTable[nums[i]]++
+    }
+
+    for(let j=0; j<hashTable.length; j++){
+        if(hashTable[j] > 1) return j
+    }
+};
+
+//S.C => O(N)
+//T.C => O(N)
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    for(let i=0; i<nums.length; i++){
+        let idx = Math.abs(nums[i]);
+    if(nums[idx] < 0) return idx
+        nums[idx] = - nums[idx]
+    }
+};
+
+//S.C => O(1)
+//T.C => O(N)
