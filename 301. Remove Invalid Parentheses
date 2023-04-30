@@ -1,0 +1,49 @@
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+const getMinInv = function(s){
+    const stack = [];
+    let i = 0;
+    while(i<s.length){
+        if(s[i] === "(") stack.push('(');
+        else if(s[i] == ')') {
+            if(stack.length && stack[stack.length-1] === "(") stack.pop();
+            else stack.push(")");
+        }
+        i++
+    }
+
+    return stack.length
+}
+
+const solve = function(s, minInv, res, strMap){
+    if(strMap.has(s)) return
+    else strMap.add(s)
+
+    if(minInv<0) return 
+
+    if(minInv === 0) {
+        if(!getMinInv(s)){
+            res.push(s);
+        }    
+        return 
+    }
+
+    for(let i=0; i< s.length; i++){
+        let left = s.substring(0,i);
+        let right = s.substring(i+1);
+        solve(left+right, minInv-1,res, strMap);
+    }
+
+    return 
+    
+}
+var removeInvalidParentheses = function(s) {
+    const res = []
+    const strMap = new Set();
+
+    solve(s,getMinInv(s), res, strMap);
+
+    return res
+};
